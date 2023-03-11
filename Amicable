@@ -1,0 +1,49 @@
+#include <stdio.h>
+enum status{amicable,NotAmicable};
+typedef enum status status;
+typedef unsigned int PositiveNumber;
+PositiveNumber read_number();
+PositiveNumber sum_divisors(PositiveNumber);
+enum status amicable_number(PositiveNumber,PositiveNumber);
+void print_result(status);
+int main()
+{
+	PositiveNumber input_1 = read_number();
+	PositiveNumber input_2 = read_number();
+	status result = amicable_number(input_1,input_2);
+	print_result(result);
+	return 0;
+}
+PositiveNumber read_number(){
+	PositiveNumber num;
+	printf("please enter a number :");
+	scanf("%d",&num);
+	return num;
+}
+PositiveNumber sum_divisors(PositiveNumber num){
+	PositiveNumber sum = 0;
+	for(int i=1;i < num;i++)
+	{
+		if(num % i == 0){
+		     sum += i;}
+	}
+	return sum;
+}
+enum status amicable_number(PositiveNumber m,PositiveNumber n){
+	if(sum_divisors(m) == n && sum_divisors(n) == m)
+	{
+		 return amicable;
+	}else
+	{
+		return NotAmicable;
+	}
+}
+void print_result(status a){
+	if(a == amicable)
+	{
+		printf("is amicable");
+	}else
+	{
+		printf("it's not amicable");
+	}
+	}
