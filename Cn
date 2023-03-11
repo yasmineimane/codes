@@ -1,0 +1,33 @@
+#include <stdio.h>
+typedef unsigned int PositiveInteger;
+typedef long unsigned int BigPositiveInteger;
+PositiveInteger read_nbr();
+BigPositiveInteger factorial(PositiveInteger);
+BigPositiveInteger catalan(PositiveInteger);
+void print_result(BigPositiveInteger);
+int main()
+{
+	PositiveInteger input = read_nbr();
+	BigPositiveInteger output = catalan(input);
+	print_result(output);
+	return 0;
+}
+PositiveInteger read_nbr(PositiveInteger n){
+	printf("please enter a number :");
+	scanf("%d",&n);
+	return n;}
+BigPositiveInteger factorial(PositiveInteger x){
+	BigPositiveInteger fact=1,i;
+	for(i = 1;i <= x;i++)
+	{
+		fact = fact * i;
+	}
+	return fact;
+	}
+BigPositiveInteger catalan(PositiveInteger a){
+	BigPositiveInteger Cn;
+	Cn = (factorial(2 * a) / (factorial(a + 1)*factorial(a)));
+	return Cn;}
+void print_result(BigPositiveInteger b){
+	printf("Cn = %d",b);
+	}
