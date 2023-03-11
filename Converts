@@ -1,0 +1,272 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int decimalTobinary(int);
+int decimalToOctal(int);
+void decimalToHexadecimal(int);
+int binaryToDecimal(int);
+int binaryToOctal(int);
+void binaryToHexadecimal(int);
+int octalToDecimal(int);
+int octalToBinary(int);
+void octalToHexadecimal(int);
+int hexadecimalToDecimal(char[]);
+int hexadecimalToBinary(char[]);
+int hexadecimalToOctal(char[]);
+void binaryToCA1(char[]);
+void binaryToCA2(char[]);
+
+int main()
+{
+ int start_base,end_base;
+ char num[100];
+ do
+ {
+  printf("if you want to exit type -1,otherwise give a number to convert :");
+  scanf("%s",&num);
+  int number = atoi(num);
+  if(number == -1)
+  {
+  break;}
+   printf("what is the base of this number ?\ntype '1'if the number is base decimal\ntype '2' if the number is binary base\ntype '3'if the number is octal base\ntype '4'if the number is base hexadecimal\n");
+   scanf("%d",&start_base);
+   printf("what is the ending base ?\ntype '1'if the conversion will be to decimal base\ntype'2'if the conversion will be to the binary base\ntype '3' i the conversion will be to octal base\ntype '4'if the conversion will be to the hexadecimal base\ntype '5'if the conversion will be to the one complement\ntype '6' if the conversion will be to the complement two\n");
+   scanf("%d",&end_base);
+   if(start_base == 1)
+   {
+    switch(end_base)
+    {
+     case 2: printf("Conversion from decimal to binary is : (%d)10=(%d)2\n",number,decimalTobinary(number));break;
+     case 3:printf("Conversion from decimal to octal is : (%d)10=(%d)8\n",number,decimalToOctal(number));break;
+     case 4:printf("conversion from decimal to hexadecimal is :(%d)10=",number );
+     decimalToHexadecimal(number);break;
+     default:printf("error");break;
+    }
+   }
+   if(start_base == 2)
+   {
+    switch(end_base)
+    {
+     case 1:printf("Conversion from binary to decimal is (%d)2=(%d)10\n",number,binaryToDecimal(number));break;
+     case 3:printf("Conversion from binary to octal is (%d)2=(%d)8\n",number,binaryToOctal(number));break;
+     case 4:printf("Conversion from binary to hexadecimal is : (%d)2=",number);
+     binaryToHexadecimal(number);break;
+     case 5:printf("Conversion from binary to one complement is : (%s)2=",num);
+binaryToCA1(num);break;
+case 6:printf("Conversion from binary to complement two is : (%s)2=",num);
+binaryToCA2(num);break;
+     default:printf("error");break;
+    }
+   }
+   if(start_base == 3)
+   {
+    switch(end_base)
+    {
+     case 1:printf("Conversion from octal to decimal is : (%d)8=(%d)10\n",number,octalToDecimal(number));break;
+     case 2:printf("Conversion from octal to binary is : (%d)8=(%d)2 \n",number,octalToBinary(number));break;
+     case 4:printf("Conversion from octal to hexadecimal is : (%d)8=",number);
+     octalToHexadecimal(number);break;
+     default:printf("error");break;
+    }
+   }
+   if(start_base == 4)
+   {
+    switch(end_base)
+    {
+     case 1:printf("Conversion from hexadecimal to decimal is : (%s)16=(%d)10\n",num,hexadecimalToDecimal(num));break;
+     case 2:printf("Conversion from hexadecimal to binary is :(%s)16=(%d)2\n",num,hexadecimalToBinary(num));break;
+     case 3:printf("Conversion from hexadecimal to octal is : (%s)16=(%d)8\n",num,hexadecimalToOctal(num));break;
+     default:printf("error");
+     }
+     }
+}while(num != -1);
+printf("Thanks!");
+return 0;
+}
+
+int decimalTobinary(int dec){
+	int nbr_binary = 0,rem,p = 1,i;
+	while(dec != 0)
+	{
+		rem = dec % 2;
+		dec = dec / 2;
+		nbr_binary = nbr_binary + rem*p;
+		p = p*10;
+	}
+	return nbr_binary;
+}
+
+int decimalToOctal(int D){
+	int nbr_octal = 0,rem,p = 1,i;
+	while(D != 0)
+	{
+		rem = D % 8;
+		D = D / 8;
+		nbr_octal = nbr_octal + rem*p;
+		p = p * 10;
+	}
+	return nbr_octal;
+}
+
+void decimalToHexadecimal(int nbr_dec){
+	int rem,i=1,j;
+	char hexa[100];
+	while(nbr_dec != 0)
+	{
+		rem = nbr_dec % 16;
+		if(rem < 10)
+		{
+			rem = rem + 48;
+		}else
+		{
+			rem = rem + 55;
+		}
+		hexa[i++] = rem;
+		nbr_dec = nbr_dec / 16;
+	}
+	printf("(");
+	for(j = i - 1;j > 0;j--)
+	{
+		printf("%c",hexa[j]);
+	}
+	printf(")16\n");
+ }
+ 
+int binaryToDecimal(int Bin){
+	int nbr_binary = 0,rem,j = 0;
+	while(Bin != 0)
+	{
+		rem = Bin % 10;
+		Bin = Bin /10;
+		nbr_binary = nbr_binary + rem * pow(2, j);
+		j++;
+	}
+	return nbr_binary;
+}
+ 
+int binaryToOctal(int nbr_bin){
+ int B = binaryToDecimal(nbr_bin);
+ return decimalToOctal(B);
+ }
+ 
+void binaryToHexadecimal(int n_b){
+ int n_binary = binaryToDecimal(n_b);
+ decimalToHexadecimal(n_binary);
+ }
+ 
+int octalToDecimal(int oct){
+ int j = 0,rem,nbr_decimal = 0;
+ while(oct != 0)
+ {
+  rem = oct % 10;
+  oct = oct / 10;
+  nbr_decimal = nbr_decimal + rem * pow(8, j);
+  j++;
+ }
+ return nbr_decimal;
+ }
+ 
+int octalToBinary(int n_oct){
+ int n_octal = octalToDecimal(n_oct);
+ return decimalTobinary(n_octal);
+ }
+ 
+void octalToHexadecimal(int Oct){
+ int n_hexa = octalToDecimal(Oct);
+ decimalToHexadecimal(n_hexa);
+ }
+ 
+int hexadecimalToDecimal(char hexa[100]){
+ int nbr_decimal = 0,len,j = 0,i;
+ len = strlen(hexa);
+ for(i = len -1;i >= 0;i--)
+ {
+  if(hexa[i] >= '0' && hexa[i] <= '9')
+  {
+   nbr_decimal = nbr_decimal +(hexa[i]-48)*pow(16,j);
+   j++;
+  }else if(hexa[i] >= 'A' && hexa[i] <= 'F'){
+   nbr_decimal = nbr_decimal+(hexa[i]-55)*pow(16,j);
+   j++;
+   }
+ }
+ return nbr_decimal;}
+ 
+ int hexadecimalToBinary(char H[100]){
+  int n_bin = hexadecimalToDecimal(H);
+  return decimalTobinary(n_bin);
+ }
+ 
+ int hexadecimalToOctal(char n_h[100]){
+  int n_oc = hexadecimalToDecimal(n_h);
+  return decimalToOctal(n_oc);
+ }
+ 
+ void binaryToCA1(char l[8]){
+  int i,j;
+  char hex[8];
+  if(l[0]=='0'){
+  printf("(");
+  for(j = 0;j <= 7;j++){
+  hex[j] = l[j];
+  printf("%c",hex[j]);
+}
+printf(")CA1\n");
+}else if(l[0] == '1'){
+printf("(");
+for(i = 0;i <= 7;i++){
+if(l[i]=='1'){
+hex[i] = '0';
+}else if(l[i]=='0'){
+hex[i] = '1';
+}
+printf("%c",hex[i]);
+}
+printf(")CA1\n");
+}
+}
+
+void binaryToCA2(char bin[8]){
+ char one[8];
+ char two[8];
+ int c = 1,i,j,k;
+ if(bin[0]== '0'){
+	printf("(");
+    for(i = 0;i <= 7;i++){
+       two[i] = bin[i];
+       printf("%c",two[i]);
+    }
+   printf(")CA2\n");
+}else if(bin[0] == '1'){
+	for(j = 0;j <= 7;j++)
+	{
+		if(bin[j] == '0')
+		{
+		  one[j]= '1';
+		}else if(bin[j] = '1')
+		 {
+		 	one[j] = '0';
+		 }
+	}
+	}
+if(bin[0] == '1'){
+printf("(");
+for(k = 7;k >= 0;k--){
+if(one[k] == '1' && c == 1){
+two[k] = '0';
+}else if(one[k] == '0' && c == 1){
+two[k] = '1';
+c = 0;
+}else{
+two[k] = one[k];
+}
+}
+int x;
+for(x = 0;x <= 7;x++){
+printf("%c",two[x]);
+}
+printf(")CA2\n");
+}
+}
