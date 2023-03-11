@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <stdbool.h>
+typedef unsigned int PositiveNumber;
+PositiveNumber read_nbr();
+bool IsItPrime(PositiveNumber );
+void print_result(PositiveNumber ,PositiveNumber );
+int main()
+{
+	PositiveNumber input_1 = read_nbr();
+	PositiveNumber input_2 = read_nbr();
+	print_result(input_1, input_2);
+	return 0;
+}
+
+PositiveNumber read_nbr(PositiveNumber x){
+	printf("please enter a number :");
+	scanf("%d",&x);
+	return x;
+	}
+	
+bool IsItPrime(PositiveNumber y){
+	bool p;
+	int i;
+	p = true;
+	for(i = 2;i <= y/2;i++)
+	{
+		if(y % i == 0)
+		{
+			p = false;
+		}
+	}
+	return p;
+	}
+	
+void print_result(PositiveNumber A,PositiveNumber B){
+	if((A - B == 2) && (IsItPrime(A))&&(IsItPrime(B)))
+	{
+		printf("%d and %d are friends number",A,B);
+	}else
+	{
+		printf("%d and %d are not friends number",A,B);
+	}
+	}
