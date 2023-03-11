@@ -1,0 +1,79 @@
+#include <stdio.h>
+#include <math.h>
+int read_nbr();
+int read_nbrDecalage();
+int Decalage(int,int);
+void print_result(int);
+int main()
+{
+	int input_1 = read_nbr();
+	int input_2 = read_nbrDecalage();
+	int output = Decalage(input_1,input_2);
+	print_result(output);
+	return 0;
+}
+
+int read_nbr(int number){
+	printf("please enter a number:");
+	scanf("%d",&number);
+	return number;
+	}
+	
+	
+int read_nbrDecalage(int x){
+	printf("please enter nbr of decalage :");
+	scanf("%d",&x);
+	return x;
+	}
+	
+	
+int Decalage(int n,int z){
+	int nbr,y,p,i,j,s,digit;
+	y = n;
+	i = 0;
+	while(y != 0)
+	{
+		y = y / 10;
+		i++;
+	}
+	p = 1;
+	j = i ;
+	s = 0;
+	if(z % j == 0)
+	{
+		return n;
+	}
+	else if(z > j)
+	{
+    	while(z > j)
+		{
+			z = z - j;
+		}
+		do
+	{
+		digit = n % 10;
+		s = s + digit * p;
+		p = p * 10;
+		n = n / 10;
+		j--;
+	}while(j != z);
+	nbr = s * pow(10,j) + n;
+	return nbr;
+	}else if(z < j)
+	{
+	do
+	{
+		digit = n % 10;
+		s = s + digit * p;
+		p = p * 10;
+		n = n / 10;
+		j--;
+	}while(j != z);
+	nbr = s * pow(10, j) + n;
+	return nbr;}
+	}
+	
+	
+void print_result(int a){
+	printf("%d",a);
+	}
