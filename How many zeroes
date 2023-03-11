@@ -1,0 +1,51 @@
+#include <stdio.h>
+typedef unsigned int PositiveInteger;
+typedef long unsigned int BigPositiveNumber;
+PositiveInteger read_nbr();
+BigPositiveNumber  factorial(PositiveInteger );
+PositiveInteger  how_many_zeroes(PositiveInteger);
+void print_result(PositiveInteger);
+
+int main()
+{
+	PositiveInteger input = read_nbr();
+	PositiveInteger result = how_many_zeroes(input);
+	print_result(result);
+	return 0;
+}
+
+PositiveInteger read_nbr(PositiveInteger n){
+	printf("please enter a number :");
+	scanf("%d",&n);
+	return n;}
+	
+BigPositiveNumber factorial(PositiveInteger x){
+     BigPositiveNumber factorial = 1;
+	for(int i = 1;i <= x;i++)
+	{
+		factorial = factorial * i;
+	}
+	return factorial;
+	}
+	
+PositiveInteger  how_many_zeroes(PositiveInteger a){
+	PositiveInteger y,digit,nbr_zeroes = 0;
+	y = factorial(a);
+	while(y != 0)
+	{
+		digit = y % 10;
+		if(digit == 0)
+		{
+			nbr_zeroes += 1;
+		}else
+		{
+			break;
+		}
+		y = y/ 10;
+	}
+	return nbr_zeroes;
+	}
+	
+void print_result(PositiveInteger x){
+	printf("The factorial of this number ends with %d zeroes ",x);
+	}
