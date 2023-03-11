@@ -1,0 +1,30 @@
+#include <stdio.h>
+typedef unsigned int PositiveNumber;
+void Fibonacci(PositiveNumber);
+PositiveNumber read_nbr();
+int main()
+{
+	PositiveNumber input = read_nbr();
+    Fibonacci(input);
+	return 0;
+}
+
+PositiveNumber read_nbr(PositiveNumber n){
+	printf("please enter a number :");
+	scanf("%d",&n);
+	return n;
+	}
+void Fibonacci(PositiveNumber x){
+	PositiveNumber Un,U1,U0;
+	int i;
+	U0 = 1;
+	U1 = 1;
+	printf("%d",U0);
+	for(i = 1;i <= x;i++)
+	{
+		Un = U0 + U1;
+		U0 = U1;
+		U1 = Un;
+		printf(" %d ",U0);
+	}
+}
