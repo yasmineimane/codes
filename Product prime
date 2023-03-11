@@ -1,0 +1,56 @@
+#include <stdio.h>
+#include <stdbool.h>
+int read_nbr1();
+bool IsItPrime(int,int);
+int ProductOfPrimes(int,int);
+void print_result(int);
+
+
+int main()
+{
+	int input_1 = read_nbr1();
+	int input_2 = read_nbr1();
+	int output = ProductOfPrimes(input_1, input_2);
+	print_result(output);
+	return 0;
+}
+
+
+int read_nbr1(int L){
+	printf("please enter a number :");
+	scanf("%d",&L);
+	return L;}
+	
+bool IsItPrime(int a,int b){
+	bool p = true;
+	int i,j;
+	for(i = a;i < b;i++)
+	{
+		for(j = 1;j < i/2;j++)
+		{
+			if(i % j == 0)
+			{
+				p = false;
+			}
+		}
+	}
+	}
+	
+int ProductOfPrimes(int x,int y){
+	int k,z,g = 1;
+	for(k = x;k < y;k++)
+	{
+		for(z = 1;z < k / 2;z++)
+		{
+			if(IsItPrime(x, y))
+			{
+				g = g * z;
+			}
+		}
+	}
+	return g;
+	}
+	
+void print_result(int s){
+	printf("%d",s);
+}
